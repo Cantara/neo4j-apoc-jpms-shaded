@@ -14,6 +14,13 @@
         <neo4j.version>4.4.11</neo4j.version>
     </properties>
 
+    <scm>
+        <developerConnection>scm:git:ssh://git@github.com/Cantara/neo4j-apoc-jpms-shaded.git</developerConnection>
+        <connection>scm:git:https://github.com/Cantara/neo4j-apoc-jpms-shaded.git</connection>
+        <url>https://github.com/Cantara/neo4j-apoc-jpms-shaded</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <dependencies>
         <!-- Neo4j service -->
         <dependency>
@@ -192,6 +199,33 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>cantara-releases</id>
+            <name>Cantara Release Repository</name>
+            <url>https://mvnrepo.cantara.no/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>cantara-snapshots</id>
+            <name>Cantara Snapshot Repository</name>
+            <url>https://mvnrepo.cantara.no/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>cantara</id>
+            <name>Cantara Release Repository</name>
+            <url>https://mvnrepo.cantara.no/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>cantara</id>
+            <name>Cantara Snapshot Repository</name>
+            <url>https://mvnrepo.cantara.no/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
 
 
