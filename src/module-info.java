@@ -53,7 +53,6 @@ open module xorcery.neo4j.shaded {
     requires transitive org.eclipse.jetty.servlet;
     requires transitive org.eclipse.jetty.util;
     requires transitive org.reactivestreams;
-    requires transitive parboiled.core;
     requires transitive reactor.core;
     requires transitive scala.library;
     requires transitive scala.reflect;
