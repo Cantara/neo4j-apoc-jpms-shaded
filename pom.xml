@@ -127,6 +127,10 @@
                                     <!-- of the included artifacts, the scala.* package is only found in org.neo4j:neo4j-cypher-planner, which is needed -->
                                     <pattern>scala.collection</pattern>
                                     <shadedPattern>org.neo4j.shaded.scala.collection</shadedPattern>
+                                    <includes>
+                                        <include>scala.collection.CypherPlannerBitSetOptimizations</include>
+                                        <include>scala.collection.CypherPlannerBitSetOptimizations$</include>
+                                    </includes>
                                 </relocation>
                             </relocations>
                             <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
