@@ -122,6 +122,13 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <relocations>
+                                <relocation>
+                                    <!-- of the included artifacts, the scala.* package is only found in org.neo4j:neo4j-cypher-planner, which is needed -->
+                                    <pattern>scala.collection</pattern>
+                                    <shadedPattern>org.neo4j.shaded.scala.collection</shadedPattern>
+                                </relocation>
+                            </relocations>
                             <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
                             <artifactSet>
                                 <includes>
@@ -141,7 +148,6 @@
                                 <filter>
                                     <artifact>*:*</artifact>
                                     <excludes>
-                                        <exclude>scala/**</exclude>
                                         <exclude>log4j2.xml</exclude>
                                         <exclude>Log4j-*</exclude>
                                         <exclude>**/module-info.class</exclude>
