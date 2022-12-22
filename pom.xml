@@ -4,7 +4,7 @@
 
     <groupId>com.exoreaction.xorcery</groupId>
     <artifactId>neo4j-apoc-jpms-shaded</artifactId>
-    <version>5.2.0.2</version>
+    <version>5.2.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -17,7 +17,7 @@
         <developerConnection>scm:git:ssh://git@github.com/Cantara/neo4j-apoc-jpms-shaded.git</developerConnection>
         <connection>scm:git:https://github.com/Cantara/neo4j-apoc-jpms-shaded.git</connection>
         <url>https://github.com/Cantara/neo4j-apoc-jpms-shaded</url>
-        <tag>neo4j-apoc-jpms-shaded-5.2.0.2</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencies>
