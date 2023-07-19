@@ -10,7 +10,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <neo4j.version>5.9.0</neo4j.version>
+        <neo4j.version>5.10.0</neo4j.version>
         <asm.version>9.5</asm.version>
         <log4j.version>2.20.0</log4j.version>
         <slf4j.version>2.0.7</slf4j.version>
