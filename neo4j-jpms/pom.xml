@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.exoreaction.xorcery</groupId>
+        <artifactId>neo4j-jpms-shaded</artifactId>
+        <version>5.10.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>neo4j-jpms</artifactId>
+    <version>5.10.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <log4j.version>2.20.0</log4j.version>
+    </properties>
+
+    <scm>
+        <developerConnection>scm:git:ssh://git@github.com/Cantara/neo4j-apoc-jpms-shaded.git</developerConnection>
+        <connection>scm:git:https://github.com/Cantara/neo4j-apoc-jpms-shaded.git</connection>
+        <url>https://github.com/Cantara/neo4j-apoc-jpms-shaded</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <dependencies>
+        <!-- Neo4j shaded -->
+        <dependency>
+            <groupId>com.exoreaction.xorcery</groupId>
+            <artifactId>neo4j-shaded</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
+            <version>${log4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.moditect</groupId>
+                <artifactId>moditect-maven-plugin</artifactId>
+                <version>1.0.0.Final</version>
+                <executions>
+                    <execution>
+                        <id>add-module-infos</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>add-module-info</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/modules</outputDirectory>
+                            <overwriteExistingFiles>true</overwriteExistingFiles>
+                            <failOnWarning>false</failOnWarning>
+                            <jdepsExtraArgs>
+                                <arg>--multi-release</arg>
+                                <arg>17</arg>
+                                <arg>--ignore-missing-deps</arg>
+                            </jdepsExtraArgs>
+                            <modules>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.exoreaction.xorcery</groupId>
+                                        <artifactId>neo4j-shaded</artifactId>
+                                    </artifact>
+                                    <moduleInfo>
+                                        <name>xorcery.neo4j.shaded</name>
+                                        <open>true</open>
+                                        <requires>
+                                            *;
+                                        </requires>
+                                        <exports>
+                                            org.neo4j*;
+                                            org.apache.lucene*;
+                                            org.apache.shiro*;
+                                            magnolia;
+                                            mercator;
+                                            scala*;
+                                        </exports>
+                                    </moduleInfo>
+                                </module>
+                            </modules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-modularized-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <copy file="${project.build.directory}/modules/neo4j-shaded-${project.version}.jar"
+                                      tofile="${project.build.directory}/${project.build.finalName}.jar"
+                                      overwrite="true"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>cantara-releases</id>
+            <name>Cantara Release Repository</name>
+            <url>https://mvnrepo.cantara.no/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>cantara-snapshots</id>
+            <name>Cantara Snapshot Repository</name>
+            <url>https://mvnrepo.cantara.no/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>cantara</id>
+            <name>Cantara Release Repository</name>
+            <url>https://mvnrepo.cantara.no/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>cantara</id>
+            <name>Cantara Snapshot Repository</name>
+            <url>https://mvnrepo.cantara.no/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>
+
+
+

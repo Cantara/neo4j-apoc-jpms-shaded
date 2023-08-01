@@ -4,21 +4,14 @@ package no.cantara.neo4j_jpms_shaded.test;
 import org.junit.jupiter.api.Test;
 import org.neo4j.dbms.api.DatabaseManagementService;
 import org.neo4j.dbms.api.DatabaseManagementServiceBuilder;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.ResourceIterator;
-import org.neo4j.graphdb.Result;
-import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import static org.neo4j.configuration.GraphDatabaseSettings.DEFAULT_DATABASE_NAME;
@@ -26,21 +19,19 @@ import static org.neo4j.configuration.GraphDatabaseSettings.DEFAULT_DATABASE_NAM
 public class EmbeddedNeo4jServerTest {
 
     @Test
-    void thatBasicEmbeddedNeo4jCanExecuteCypherAndFindNodes() throws IOException {
-        String neo4jHomeStr = "target/_neo4j-basic-embedded-test-" + UUID.randomUUID();
-        Path neo4jHomePath = Path.of(neo4jHomeStr);
-        try {
-            Files.createDirectories(neo4jHomePath);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+    public void testTest( ) throws IOException {
+
+        Path neo4jHomePath = Files.createTempDirectory("neo4j");
+
         DatabaseManagementService managementService = new DatabaseManagementServiceBuilder(neo4jHomePath).build();
         try {
             GraphDatabaseService graphDb = managementService.database(DEFAULT_DATABASE_NAME);
-            try (Transaction tx = graphDb.beginTx(3, TimeUnit.MINUTES)) {
+            try (Transaction tx = graphDb.beginTx(3, TimeUnit.MINUTES))
+            {
                 /*
                  * Cypher examples are taken from the neo4j getting-started docs: https://neo4j.com/docs/getting-started/5/cypher-intro/large-statements/
                  */
+
                 try (Result result = tx.execute("""
                         CREATE (matrix:Movie {title: 'The Matrix', released: 1997})
                         CREATE (cloudAtlas:Movie {title: 'Cloud Atlas', released: 2012})
