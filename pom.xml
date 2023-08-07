@@ -4,7 +4,7 @@
 
     <groupId>com.exoreaction.xorcery</groupId>
     <artifactId>neo4j-shaded</artifactId>
-    <version>5.10.0_1</version>
+    <version>5.10.0_2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -22,7 +22,7 @@
         <developerConnection>scm:git:ssh://git@github.com/Cantara/neo4j-apoc-jpms-shaded.git</developerConnection>
         <connection>scm:git:https://github.com/Cantara/neo4j-apoc-jpms-shaded.git</connection>
         <url>https://github.com/Cantara/neo4j-apoc-jpms-shaded</url>
-        <tag>neo4j-shaded-5.10.0_1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencies>
@@ -440,8 +440,7 @@
                         </goals>
                         <configuration>
                             <target>
-                                <copy file="${project.build.directory}/modules/${project.build.finalName}.jar" tofile="${project.build.directory}/${project.build.finalName}.jar"
-                                      overwrite="true" />
+                                <copy file="${project.build.directory}/modules/${project.build.finalName}.jar" tofile="${project.build.directory}/${project.build.finalName}.jar" overwrite="true" />
                             </target>
                         </configuration>
                     </execution>
