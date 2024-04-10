@@ -158,6 +158,10 @@
                     <groupId>org.apache.logging.log4j</groupId>
                     <artifactId>log4j-layout-template-json</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.neo4j.app</groupId>
+                    <artifactId>neo4j-server</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -172,13 +176,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--
         <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>4.0.2</version>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-common</artifactId>
+            <version>${neo4j.version}</version>
+            <scope>compile</scope>
         </dependency>
-        -->
         <dependency>
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm</artifactId>
@@ -231,24 +234,16 @@
             <version>${lucene.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-<!--            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                 <execution>
-                     <goals>
-                        <goal>jar</goal>
-                     </goals>
-                  </execution>
-                </executions>
-                <configuration>
-                    <classifier>client</classifier>
-                </configuration>
-            </plugin>      -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
