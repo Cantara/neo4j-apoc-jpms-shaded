@@ -15,7 +15,7 @@
         <asm.version>9.7</asm.version>
         <log4j.version>2.23.1</log4j.version>
         <slf4j.version>2.0.13</slf4j.version>
-        <lucene.version>9.10.0</lucene.version>
+        <lucene.version>9.11.0</lucene.version>
     </properties>
 
     <scm>
@@ -324,7 +324,7 @@
                                         <Implementation-Version>${neo4j.version}</Implementation-Version>
                                     </manifestEntries>
                                 </transformer>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                     <resource>META-INF/PublicApi.txt</resource>
                                 </transformer>
