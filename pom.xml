@@ -4,14 +4,14 @@
 
     <groupId>com.exoreaction.xorcery</groupId>
     <artifactId>neo4j-shaded</artifactId>
-    <version>5.18.1.7-SNAPSHOT</version>
+    <version>5.22.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <neo4j.version>5.21.2</neo4j.version>
+        <neo4j.version>5.22.0</neo4j.version>
         <asm.version>9.7</asm.version>
         <log4j.version>2.23.1</log4j.version>
         <slf4j.version>2.0.16</slf4j.version>
@@ -278,13 +278,14 @@
                                     <include>org.neo4j:*</include>
                                     <include>org.neo4j.app:*</include>
                                     <include>org.neo4j.licensing-proxy:*</include>
-                                    <include>com.propensive:*</include>
+                                    <include>com.softwaremill.magnolia1_2:*</include>
                                     <include>org.bitbucket.inkytonik.kiama:*</include>
                                     <!--
                                                                         <include>org.scala-lang.modules:scala-xml_2.12</include>
                                     <include>org.apache.lucene:*</include>
                                     -->
                                     <include>org.apache.shiro:*</include>
+                                    <include>org.apache.shiro.crypto:*</include>
                                     <include>org.scala-lang:*</include>
                                     <include>org.scala-lang.modules:*</include>
                                 </includes>
@@ -333,127 +334,6 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>
-                <groupId>org.moditect</groupId>
-                <artifactId>moditect-maven-plugin</artifactId>
-                <version>1.1.0-SNAPSHOT</version>
-                <executions>
-                    <execution>
-                        <id>add-module-infos</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>add-module-info</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/modules</outputDirectory>
-                            <overwriteExistingFiles>true</overwriteExistingFiles>
-                            <failOnWarning>false</failOnWarning>
-                            <jdepsExtraArgs>
-                                <arg>&#45;&#45;multi-release</arg>
-                                <arg>17</arg>
-                                <arg>&#45;&#45;ignore-missing-deps</arg>
-                            </jdepsExtraArgs>
-                            <modules>
-                                <module>
-                                    <artifact>
-                                        <groupId>com.propensive</groupId>
-                                        <artifactId>mercator_2.13</artifactId>
-                                        <version>0.2.1</version>
-                                    </artifact>
-                                    <moduleInfo>
-                                        <name>mercator</name>
-                                    </moduleInfo>
-                                </module>
-                                <module>
-                                    <artifact>
-                                        <groupId>com.propensive</groupId>
-                                        <artifactId>magnolia_2.13</artifactId>
-                                        <version>0.17.0</version>
-                                    </artifact>
-                                    <moduleInfo>
-                                        <name>magnolia</name>
-                                    </moduleInfo>
-                                </module>
-                                <module>
-                                    <file>${project.build.directory}/${project.artifactId}-${project.version}.jar</file>
-                                    <additionalDependencies>
-                                        <dependency>
-                                            <groupId>org.neo4j</groupId>
-                                            <artifactId>neo4j</artifactId>
-                                            <version>${neo4j.version}</version>
-                                        </dependency>
-                                        <dependency>
-                                            <groupId>org.neo4j</groupId>
-                                            <artifactId>neo4j-security</artifactId>
-                                            <version>${neo4j.version}</version>
-                                        </dependency>
-                                    </additionalDependencies>
-
-                                    <moduleInfo>
-                                        <name>xorcery.neo4j.shaded</name>
-                                        <open>true</open>
-                                        <requires>
-                                            !unnamed;
-                                            *;
-                                        </requires>
-                                        <exports>
-                                            *;
-                                        </exports>
-                                        <uses>
-                                            org.neo4j.configuration.SettingsDeclaration;
-                                            org.neo4j.configuration.GroupSetting;
-                                            org.neo4j.configuration.SettingMigrator;
-                                            org.neo4j.index.internal.gbptree.TreeNodeLayoutFactory;
-                                            org.neo4j.kernel.impl.index.schema.TokenIndexIdLayoutFactory;
-                                            org.neo4j.internal.counts.DegreeStoreProvider;
-                                            org.neo4j.internal.counts.CountsStoreProvider;
-                                            org.neo4j.graphdb.factory.module.edition.migration.MigrationEditionModuleFactory;
-                                            org.neo4j.graphdb.factory.module.id.IdContextFactoryProvider;
-                                            org.neo4j.server.startup.EntryPoint;
-                                            org.neo4j.kernel.monitoring.tracing.TracerFactory;
-                                            org.neo4j.server.rest.repr.RepresentationFormat;
-                                            org.neo4j.bolt.protocol.common.connector.transport.ConnectorTransport;
-                                            org.neo4j.capabilities.CapabilityDeclaration;
-                                            org.neo4j.capabilities.CapabilityProvider;
-                                            org.neo4j.cli.CommandProvider;
-                                            org.neo4j.dbms.archive.CheckDatabase;
-                                            org.neo4j.graphdb.schema.AnalyzerProvider;
-                                            org.neo4j.storageengine.api.StorageEngineFactory;
-                                            org.neo4j.kernel.diagnostics.DiagnosticsOfflineReportProvider;
-                                            org.neo4j.kernel.impl.constraints.ConstraintSemantics;
-                                            org.neo4j.kernel.extension.ExtensionFactory;
-                                            org.neo4j.internal.batchimport.BatchImporterFactory;
-                                            org.neo4j.internal.batchimport.IncrementalBatchImporterFactory;
-                                            org.neo4j.kernel.impl.store.format.RecordFormats$Factory;
-                                            org.neo4j.server.startup.BootloaderExtension;
-                                            org.neo4j.kernel.impl.transaction.log.checkpoint.CheckPointThresholdPolicy;
-                                        </uses>
-                                    </moduleInfo>
-                                </module>
-                            </modules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <id>copy-modularized-jar</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target>
-                                <copy file="${project.build.directory}/modules/${project.build.finalName}.jar" tofile="${project.build.directory}/${project.build.finalName}.jar" overwrite="true" />
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
     </build>
 
