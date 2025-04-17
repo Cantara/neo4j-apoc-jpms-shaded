@@ -47,6 +47,14 @@
                     <artifactId>neo4j-slf4j-provider</artifactId>
                 </exclusion>
                 <exclusion>
+                    <groupId>org.neo4j</groupId>
+                    <artifactId>neo4j-import-tool</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>blue.strategic.parquet</groupId>
+                    <artifactId>parquet-floor</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>jakarta.xml.bind</groupId>
                     <artifactId>jakarta.xml.bind-api</artifactId>
                 </exclusion>
@@ -174,15 +182,25 @@
         </dependency>
         <dependency>
             <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-common</artifactId>
+            <artifactId>neo4j-kernel</artifactId>
             <version>${neo4j.version}</version>
-            <scope>compile</scope>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.neo4j</groupId>
+                    <artifactId>neo4j-import-tool</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>blue.strategic.parquet</groupId>
+                    <artifactId>parquet-floor</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-import-tool</artifactId>
+            <artifactId>neo4j-common</artifactId>
             <version>${neo4j.version}</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.ow2.asm</groupId>
