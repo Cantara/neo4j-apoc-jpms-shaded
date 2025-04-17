@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.neo4j.configuration.Config;
 import org.neo4j.dbms.api.DatabaseManagementService;
-import org.neo4j.dbms.api.DatabaseManagementServiceBuilder;
 import org.neo4j.dbms.api.DatabaseManagementServiceBuilderImplementation;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Result;
@@ -23,8 +22,10 @@ import java.util.function.Function;
 public class Neo4jEmbeddedTest {
 
     @Test
-    public void testEmbedded(@TempDir File tempDir)
+    public void testEmbedded()
     {
+        File tempDir = new File("target/neo4j");
+
         // The below is so that we can cut out neo4j-server from dependencies
         DatabaseManagementService dbms = new DatabaseManagementServiceBuilderImplementation(tempDir.toPath())
         {
@@ -41,8 +42,12 @@ public class Neo4jEmbeddedTest {
                             }
                         };
                     }
+
+
                 };
             }
+
+
         }.build();
 
         try {
