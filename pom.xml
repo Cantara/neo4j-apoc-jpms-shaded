@@ -4,16 +4,19 @@
 
     <groupId>com.exoreaction.xorcery</groupId>
     <artifactId>neo4j-shaded</artifactId>
-    <version>5.26.5.4-SNAPSHOT</version>
+    <version>2025.05.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.release>21</maven.compiler.release>
 
-        <neo4j.version>5.26.5</neo4j.version>
+        <neo4j.version>2025.05.0</neo4j.version>
         <asm.version>9.8</asm.version>
-        <log4j.version>2.24.3</log4j.version>
+        <log4j.version>2.25.0</log4j.version>
         <slf4j.version>2.0.17</slf4j.version>
         <lucene.version>9.11.1</lucene.version>
     </properties>
