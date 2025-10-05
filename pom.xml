@@ -14,7 +14,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.release>21</maven.compiler.release>
 
-        <neo4j.version>2025.05.0</neo4j.version>
+        <neo4j.version>2025.07.0</neo4j.version>
         <asm.version>9.8</asm.version>
         <log4j.version>2.25.0</log4j.version>
         <slf4j.version>2.0.17</slf4j.version>
@@ -348,7 +348,7 @@
                                         <Implementation-Version>${neo4j.version}</Implementation-Version>
                                     </manifestEntries>
                                 </transformer>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                     <resource>META-INF/PublicApi.txt</resource>
                                 </transformer>
