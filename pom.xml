@@ -306,6 +306,14 @@
                                         <include>scala.collection.CypherPlannerBitSetOptimizations$</include>
                                     </includes>
                                 </relocation>
+                                <relocation>
+                                    <!-- org.neo4j:lucene9-shaded relocates Lucene 9 to org.neo4j.shaded.lucene9 but leaves its
+                                         Snowball stemmers in org.tartarus.snowball, the same package lucene-analysis-common 10
+                                         exports. On the module path that is a split package, so relocate them next to Lucene 9.
+                                         Only the bundled lucene9 classes reference them. -->
+                                    <pattern>org.tartarus.snowball</pattern>
+                                    <shadedPattern>org.neo4j.shaded.lucene9.org.tartarus.snowball</shadedPattern>
+                                </relocation>
                             </relocations>
                             <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
                             <createSourcesJar>true</createSourcesJar>
@@ -317,6 +325,7 @@
                                     <include>org.neo4j.licensing-proxy:*</include>
                                     <include>com.softwaremill.magnolia1_2:*</include>
                                     <include>com.softwaremill.magnolia1_3:*</include>
+                                    <include>com.lihaoyi:*</include>
                                     <include>org.bitbucket.inkytonik.kiama:*</include>
                                     <!--
                                                                         <include>org.scala-lang.modules:scala-xml_2.12</include>
