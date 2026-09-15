@@ -4,7 +4,7 @@
 
     <groupId>com.exoreaction.xorcery</groupId>
     <artifactId>neo4j-shaded</artifactId>
-    <version>2025.05.0.2-SNAPSHOT</version>
+    <version>2026.08.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -14,11 +14,11 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.release>21</maven.compiler.release>
 
-        <neo4j.version>2025.10.1</neo4j.version>
-        <asm.version>9.10</asm.version>
-        <log4j.version>2.25.3</log4j.version>
+        <neo4j.version>2026.08.1</neo4j.version>
+        <asm.version>9.10.1</asm.version>
+        <log4j.version>2.26.1</log4j.version>
         <slf4j.version>2.0.19</slf4j.version>
-        <lucene.version>9.12.3</lucene.version>
+        <lucene.version>10.5.1</lucene.version>
     </properties>
 
     <scm>
@@ -56,6 +56,13 @@
                 <exclusion>
                     <groupId>blue.strategic.parquet</groupId>
                     <artifactId>parquet-floor</artifactId>
+                </exclusion>
+                <exclusion>
+                    <!-- Neo4j 2026 pulls Apache Parquet in through neo4j-import-util. Parquet
+                         import is not used embedded, and parquet-hadoop splits packages with
+                         parquet-common/parquet-column, which the module path rejects. -->
+                    <groupId>org.apache.parquet</groupId>
+                    <artifactId>*</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>jakarta.xml.bind</groupId>
@@ -197,6 +204,13 @@
                     <groupId>blue.strategic.parquet</groupId>
                     <artifactId>parquet-floor</artifactId>
                 </exclusion>
+                <exclusion>
+                    <!-- Neo4j 2026 pulls Apache Parquet in through neo4j-import-util. Parquet
+                         import is not used embedded, and parquet-hadoop splits packages with
+                         parquet-common/parquet-column, which the module path rejects. -->
+                    <groupId>org.apache.parquet</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -292,6 +306,14 @@
                                         <include>scala.collection.CypherPlannerBitSetOptimizations$</include>
                                     </includes>
                                 </relocation>
+                                <relocation>
+                                    <!-- org.neo4j:lucene9-shaded relocates Lucene 9 to org.neo4j.shaded.lucene9 but leaves its
+                                         Snowball stemmers in org.tartarus.snowball, the same package lucene-analysis-common 10
+                                         exports. On the module path that is a split package, so relocate them next to Lucene 9.
+                                         Only the bundled lucene9 classes reference them. -->
+                                    <pattern>org.tartarus.snowball</pattern>
+                                    <shadedPattern>org.neo4j.shaded.lucene9.org.tartarus.snowball</shadedPattern>
+                                </relocation>
                             </relocations>
                             <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
                             <createSourcesJar>true</createSourcesJar>
@@ -302,6 +324,8 @@
                                     <include>org.neo4j.app:*</include>
                                     <include>org.neo4j.licensing-proxy:*</include>
                                     <include>com.softwaremill.magnolia1_2:*</include>
+                                    <include>com.softwaremill.magnolia1_3:*</include>
+                                    <include>com.lihaoyi:*</include>
                                     <include>org.bitbucket.inkytonik.kiama:*</include>
                                     <!--
                                                                         <include>org.scala-lang.modules:scala-xml_2.12</include>
