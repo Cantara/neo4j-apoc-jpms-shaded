@@ -14,7 +14,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.release>21</maven.compiler.release>
 
-        <neo4j.version>2026.08.1</neo4j.version>
+        <neo4j.version>2026.09.0</neo4j.version>
         <asm.version>9.10.1</asm.version>
         <log4j.version>2.26.1</log4j.version>
         <slf4j.version>2.0.20</slf4j.version>
