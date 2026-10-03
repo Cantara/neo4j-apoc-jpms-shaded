@@ -220,6 +220,20 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <!-- Neo4j 2026 dropped neo4j-graph-algo from the org.neo4j:neo4j aggregate,
+                 but still publishes the artifact. APOC procedures still reference it, so
+                 without this it is simply absent: consumers fail at startup with
+                 NoClassDefFoundError: org/neo4j/graphalgo/EvaluationContext while HK2
+                 creates the APOC extension registration service.
+
+                 Declared here rather than left to the aggregate so the shade below picks
+                 it up through its existing org.neo4j:* include. -->
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-graph-algo</artifactId>
+            <version>${neo4j.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm</artifactId>
             <version>${asm.version}</version>
